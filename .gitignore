@@ -4,5 +4,6 @@
 __pycache__
 myvenv
 db.sqlite3
+django_intro.py
 /static
 .DS_Store
