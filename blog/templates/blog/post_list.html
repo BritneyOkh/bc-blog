@@ -5,8 +5,18 @@
 	</head>
 	
 	<body>
-		<p>Hi there!</p>
-		<p>It works :)</p>
+		<div>
+			<h1><a href="/">Britney's Blog</a></h1>
+		</div>
+		
+		<!-- Loop through posts to display each post -->
+		{% for post in posts %}
+			<div>
+			<h2><a href="">{{ post.title }}</a></h2><!-- title -->
+			<p>Published: {{ post.published_date }}</p> <!-- published date -->
+			<p>{{ post.text|linebreaksbr }}</p> <!-- post content -->
+			</div>
+		{% endfor %}
 	</body>
 
 </html>
