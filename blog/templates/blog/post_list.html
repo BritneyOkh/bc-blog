@@ -1,22 +1,21 @@
-<html>
+{% extends 'blog/base.html' %}  <!-- to use general template -->
 
-	<head>
-		<title>Britney's Blog</title>
-	</head>
+{% block content %}
+
+	<!-- loop through posts to display each post -->
+	{% for post in posts %}
 	
-	<body>
-		<div>
-			<h1><a href="/">Britney's Blog</a></h1>
-		</div>
+		<div class="post">
 		
-		<!-- Loop through posts to display each post -->
-		{% for post in posts %}
-			<div>
-			<h2><a href="">{{ post.title }}</a></h2><!-- title -->
-			<p>Published: {{ post.published_date }}</p> <!-- published date -->
-			<p>{{ post.text|linebreaksbr }}</p> <!-- post content -->
+		<h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2> <!-- post title -->
+			
+			<div class="date">
+				<p>Published: {{ post.published_date }}</p> <!-- published date -->
 			</div>
-		{% endfor %}
-	</body>
-
-</html>
+			
+			<p>{{ post.text|linebreaksbr }}</p> <!-- post content, converts line breaks to paragraphs -->
+			
+		</div>
+	{% endfor %}
+	
+{% endblock %}

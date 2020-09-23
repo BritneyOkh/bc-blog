@@ -1,0 +1,50 @@
+{% load static %}  <!-- for css theme -->
+
+<html>
+
+	<head>
+	
+		<title>Britney's Blog</title> <!-- website title -->
+		
+		<!-- install bootstrap for website themes -->
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		
+		<!-- fonts from Google fonts - needs to have separate links -->
+		<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet" type="text/css">
+		
+		<!-- get theme setup -->
+		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+		
+	</head>
+	
+	<body>
+	
+		<div class="page-header">
+		
+			<h1><a href="/">Britney's Blog</a></h1> <!-- page/blog title -->
+		
+		</div>
+		
+		<div class="content container">
+		
+			<div class="row">
+			
+				<div class="col-md-8">
+				
+				<!-- replace with html from other templates for different pages on the website -->
+					{% block content %} 
+					{% endblock %}
+				
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</body>
+
+</html>
