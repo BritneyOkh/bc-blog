@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
@@ -17,7 +18,8 @@ def post_detail(request, pk):  # post page
     return render(request, 'blog/post_detail.html', {'post' : post})
 
 
-def post_new(request):  # admin page
+@login_required
+def post_new(request):  #  make new post
     
     if request.method == "POST":  # data has been entered into the fields
     
@@ -26,7 +28,7 @@ def post_new(request):  # admin page
         if form.is_valid():
             post = form.save(commit = False)  # commit = False creates a form instance but doesn't save it to the database - useful when form data needs to be modified
             post.author = request.user  # note: required field
-            post.published_date = timezone.now()
+            ##post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk = post.pk)  # display post once saved
     
@@ -36,7 +38,8 @@ def post_new(request):  # admin page
     return render(request, 'blog/post_edit.html', {'form' : form})
 
 
-def post_edit(request, pk):
+@login_required
+def post_edit(request, pk):  # edit page
 
     post = get_object_or_404(Post, pk = pk)  # find post
     
@@ -47,7 +50,7 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit = False)  # create form instance
             post.author = request.user
-            post.published_date = timezone.now()
+            ##post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk = post.pk)
     
@@ -55,5 +58,26 @@ def post_edit(request, pk):
         form = PostForm(instance = post)
     
     return render(request, 'blog/post_edit.html', {'form' : form})
-            
+  
+
+@login_required
+def post_draft_list(request):  # drafts page
+    
+    posts = Post.objects.filter(published_date__isnull = True).order_by('-created_date')  # order drafts by creation date
+    return render(request, 'blog/post_draft_list.html', {'posts' : posts})
+
+
+@login_required
+def post_publish(request, pk):  # publish function
+    
+    post = get_object_or_404(Post, pk = pk)  # first find post - in case user types in url
+    post.publish()
+    return redirect('post_detail', pk = pk)  # show post
+
+@login_required
+def post_remove(request, pk):  # delete function
+
+    post = get_object_or_404(Post, pk = pk)
+    post.delete()
+    return redirect('post_list')
     

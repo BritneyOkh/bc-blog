@@ -15,7 +15,6 @@ body {
 	background-color : #E8F2F5;
 }
 .content {
-	/* background-color : #9BC7D6; */
 	color : #274853;
 	font-family : 'Roboto';
 	font-size : 17px;
@@ -58,3 +57,9 @@ h2, h3, h4 {
 .post h2 a, .post h2 a:visited {
 	color : #4693AD;
 }
+
+#log {
+	font-family : 'Fugaz One';
+	font-size : 20px;
+}
+

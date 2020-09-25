@@ -24,18 +24,33 @@
 	<body>
 	
 		<div class="page-header">
+		
+			{% if user.is_authenticated %} <!-- only users can make and edit posts -->
 			
-			<h1>
+				<p class="top-menu" id="log">Hello {{ user.username }} ツ<small><a href="{% url 'logout' %}">Log Out</a></small></p> <!-- greet user + logout -->
 			
-				<a href="/">Britney's Blog</a> <!-- page/blog title -->
+				<h1>
 				
-				{% if user.is_authenticated %} <!-- only users can make posts -->
+					<a href="/">Britney's Blog</a> <!-- page/blog title -->
 					
 					<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a> <!-- add post button -->
 					
-				{% endif %}
+					<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a> <!-- edit drafts button -->
+					
+				</h1>
+					
+				
+			{% else %}  <!-- let users login -->
+					
+				<h1>
 			
-			</h1>
+					<a href="/">Britney's Blog</a> <!-- page/blog title -->
+				
+					<a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+				
+				</h1>
+					
+			{% endif %}
 		
 		</div>
 		

@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}  <!-- to use general template -->
+
+{% block content %}
+
+	{% for post in posts %} <!-- display each post draft -->
+	
+		<div class="post">
+			
+			<h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2> <!-- draft title -->
+			
+			<p class="date">Created: {{ post.created_date|date:'d-m-Y' }}</p> <!-- created date -->
+			
+			<p>{{ post.text|truncatechars:200 }}</p>
+		
+		</div>
+	
+	{% endfor %}
+
+{% endblock %}
